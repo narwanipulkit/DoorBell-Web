@@ -12,6 +12,9 @@ class FirebaseServe{
 
 	FirebaseServe(String detected){
 		try{
+			String key=System.getenv("firebase");
+			FileOutputStream fos=new FileOutputStream(new File("src/main/resources/static/smartb-7cffa-firebase-adminsdk-y293y-f7d6eeec7a.json"));
+			fos.write(key);
 			FileInputStream serviceAccount = new FileInputStream("src/main/resources/static/smartb-7cffa-firebase-adminsdk-y293y-f7d6eeec7a.json");
 
 			FirebaseOptions options = new FirebaseOptions.Builder()
