@@ -2,6 +2,7 @@ package hello;
 
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.web.bind.annotation.RequestMapping;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
@@ -48,8 +49,13 @@ public class GreetingController {
                             status);
     }
 
+    @RequestMapping("/video")
+    public String openVid(){
+        return "vid.html";
+    }
+
     @RequestMapping("/toggle")
-    public String ToggleLock(){
+    public String toggleLock(){
     	String current=readFile();
     	if(current.equals("on")){
     		writeFile("off");
@@ -60,9 +66,18 @@ public class GreetingController {
     	return "redirect:index.html";
     }
 
+    @RequestMapping(value="/motion",method=POST)
+    public @ResponseBody String motion(@RequestParam(value="detected")String det, @RequestParam(value="faces")String faces){
+        new FirebaseServe(det);
+        return "OK";
+    }
+
     @RequestMapping("/")
     public String redirect(){
     	return "index.html";
     }
+
+
+    
     
 }
