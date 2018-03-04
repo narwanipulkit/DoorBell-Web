@@ -22,7 +22,20 @@ class FirebaseServe{
 			    .setDatabaseUrl("https://smartb-7cffa.firebaseio.com")
 			    .build();
 
-			FirebaseApp.initializeApp(options);
+			boolean hasBeenInitialized=false;
+			List<FirebaseApp> firebaseApps = FirebaseApp.getApps();
+			for(FirebaseApp app : firebaseApps){
+    			if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME)){
+        			hasBeenInitialized=true;
+        			//finestayApp = app;
+    			}
+			}		
+
+			if(!hasBeenInitialized) {
+				FirebaseApp.initializeApp(options);
+			}
+
+			
 
 			final FirebaseDatabase database = FirebaseDatabase.getInstance();
 			DatabaseReference ref = database.getReference("server/");
