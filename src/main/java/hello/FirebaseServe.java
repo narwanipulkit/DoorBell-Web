@@ -42,7 +42,7 @@ class FirebaseServe{
 
 			DatabaseReference motionRef=ref.child("motion");
 			motionRef.setValueAsync(detected);
-			DatabaseReference motionRef=ref.child("face");
+			DatabaseReference faceRef=ref.child("face");
 			motionRef.setValueAsync(faces);
 
 		}
