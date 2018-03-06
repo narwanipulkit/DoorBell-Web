@@ -10,7 +10,7 @@ import com.google.firebase.database.*;
 
 class FirebaseServe{
 
-	FirebaseServe(String detected){
+	FirebaseServe(String detected,String faces){
 		try{
 			String key=System.getenv("firebase");
 			FileOutputStream fos=new FileOutputStream(new File("src/main/resources/static/smartb-7cffa-firebase-adminsdk-y293y-f7d6eeec7a.json"));
@@ -42,6 +42,9 @@ class FirebaseServe{
 
 			DatabaseReference motionRef=ref.child("motion");
 			motionRef.setValueAsync(detected);
+			DatabaseReference motionRef=ref.child("face");
+			motionRef.setValueAsync(faces);
+
 		}
 		catch(IOException e){
 			System.out.println(e);

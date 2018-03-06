@@ -68,7 +68,7 @@ public class GreetingController {
 
     @RequestMapping(value="/motion",method=POST)
     public @ResponseBody String motion(@RequestParam(value="detected")String det, @RequestParam(value="faces")String faces){
-        new FirebaseServe(det);
+        new FirebaseServe(det,faces);
         return "OK";
     }
 
