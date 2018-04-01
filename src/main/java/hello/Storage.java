@@ -35,7 +35,7 @@ class Storage{
 		if(!hasBeenInitialized) {
 			FirebaseApp.initializeApp(options);
 		}
-		FirebaseApp.initializeApp(options);
+		
 		String timestamp=(new Date()).toString();
 
 		Bucket bucket = StorageClient.getInstance().bucket();
