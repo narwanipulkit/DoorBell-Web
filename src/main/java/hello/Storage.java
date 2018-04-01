@@ -21,38 +21,21 @@ class Storage{
 		FirebaseOptions options = new FirebaseOptions.Builder()
 		    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
 		    .setStorageBucket("smartb-7cffa.appspot.com")
+		    .setDatabaseUrl("https://smartb-7cffa.firebaseio.com")
 		    .build();
+
 		FirebaseApp.initializeApp(options);
 		String timestamp=(new Date()).toString();
 
 		Bucket bucket = StorageClient.getInstance().bucket();
 		bucket.create(timestamp+".jpeg",input);
 
-		FirebaseOptions dbOptions = new FirebaseOptions.Builder()
-			    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-			    .setDatabaseUrl("https://smartb-7cffa.firebaseio.com")
-			    .build();
+		
+		final FirebaseDatabase database = FirebaseDatabase.getInstance();
+		DatabaseReference ref = database.getReference("storage/");
 
-			boolean hasBeenInitialized=false;
-			List<FirebaseApp> firebaseApps = FirebaseApp.getApps();
-			for(FirebaseApp app : firebaseApps){
-    			if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME)){
-        			hasBeenInitialized=true;
-        			//finestayApp = app;
-    			}
-			}		
-
-			if(!hasBeenInitialized) {
-				FirebaseApp.initializeApp(dbOptions);
-			}
-
-			
-
-			final FirebaseDatabase database = FirebaseDatabase.getInstance();
-			DatabaseReference ref = database.getReference("storage/");
-
-			DatabaseReference motionRef=ref.child(timestamp);
-			motionRef.setValueAsync(face);
+		DatabaseReference motionRef=ref.child(timestamp);
+		motionRef.setValueAsync(face);
 			
 	}
 }
