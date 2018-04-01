@@ -24,6 +24,17 @@ class Storage{
 		    .setDatabaseUrl("https://smartb-7cffa.firebaseio.com")
 		    .build();
 
+		boolean hasBeenInitialized=false;
+		List<FirebaseApp> firebaseApps = FirebaseApp.getApps();
+		for(FirebaseApp app : firebaseApps){
+    		if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME)){
+       			hasBeenInitialized=true;
+       			//finestayApp = app;
+   			}
+		}		
+		if(!hasBeenInitialized) {
+			FirebaseApp.initializeApp(options);
+		}
 		FirebaseApp.initializeApp(options);
 		String timestamp=(new Date()).toString();
 
