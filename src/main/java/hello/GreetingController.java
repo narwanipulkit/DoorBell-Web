@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.stereotype.Controller;
 import java.util.*;
 import java.io.*;
@@ -41,6 +42,23 @@ public class GreetingController {
     	}
     }
     
+    @RequestMapping(value="/upload", method=POST)
+    public String imageUpload(@RequestParam("file")MultipartFile file){
+        if(!file.isEmpty()){
+            try{
+                    byte[] fileBytes = file.getBytes();
+                    Storage.save(fileBytes);
+                    return "File Upload Successfull";
+
+            }
+            catch(Exception e){
+                System.out.println(e.toString());
+            }
+        }
+        return "ERROR";
+    }
+
+
     @RequestMapping("/greeting")
     //public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
     public @ResponseBody Greeting greeting(){
