@@ -19,6 +19,7 @@ class FirebaseServe{
 
 			FirebaseOptions options = new FirebaseOptions.Builder()
 			    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+			    .setStorageBucket("smartb-7cffa.appspot.com")
 			    .setDatabaseUrl("https://smartb-7cffa.firebaseio.com")
 			    .build();
 
