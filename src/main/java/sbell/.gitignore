@@ -1,0 +1,5 @@
+.gradle/*
+build/*
+src/main/java/sbell/.DS_Store
+target/*
+.DS_Store
